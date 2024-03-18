@@ -4,7 +4,6 @@ import "time"
 
 type Event struct {
 	ID          int       `json:"id"`
-	EventCode   string    `json:"eventCode"`
 	OrganizerID int       `json:"organizerId"`
 	Name        string    `json:"name"`
 	Description string    `json:"description,omitempty"`

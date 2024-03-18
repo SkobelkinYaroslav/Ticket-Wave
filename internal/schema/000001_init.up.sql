@@ -6,14 +6,11 @@ CREATE TABLE participant (
                              birth_date DATE,
                              username VARCHAR(255) UNIQUE NOT NULL,
                              password VARCHAR(255) NOT NULL,
-                             role VARCHAR(50) CHECK (role IN ('user', 'organizer')), --организатор может делать тоже самое что и юзер?
---                              preferences TEXT,
---                              favorite_events TEXT
+                             role VARCHAR(50) CHECK (role IN ('user', 'organizer'))
 );
 
 CREATE TABLE event (
                        id SERIAL PRIMARY KEY,
-                       event_code VARCHAR(50) UNIQUE NOT NULL,
                        organizer_id INT REFERENCES participant(id),
                        name VARCHAR(255) NOT NULL,
                        description TEXT,
@@ -33,7 +30,7 @@ CREATE TABLE event_feedback (
 CREATE TABLE user_event_link (
                                  user_id INT REFERENCES participant(id),
                                  event_id INT REFERENCES event(id),
-                                 link_type VARCHAR(100), --подумать какие линкт тайпы могут быть: купил билет, добавли в избранное?????
+                                 link_type VARCHAR(100) CHECK (link_type IN ('like', 'going'))
                                  PRIMARY KEY (user_id, event_id)
 );
 
