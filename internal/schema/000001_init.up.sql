@@ -30,7 +30,7 @@ CREATE TABLE event_feedback (
 CREATE TABLE user_event_link (
                                  user_id INT REFERENCES participant(id),
                                  event_id INT REFERENCES event(id),
-                                 link_type VARCHAR(100) CHECK (link_type IN ('like', 'going'))
+                                 link_type VARCHAR(100) CHECK (link_type IN ('like', 'going')),
                                  PRIMARY KEY (user_id, event_id)
 );
 

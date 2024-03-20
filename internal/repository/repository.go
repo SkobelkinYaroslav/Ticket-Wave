@@ -8,7 +8,7 @@ import (
 type Participant interface {
 	CreateParticipant(participant models.Participant) (models.Participant, error)
 	GetParticipant(id int) (models.Participant, error)
-	UpdateParticipant(participant models.Participant) error
+	UpdateParticipant(participant models.Participant) (models.Participant, error)
 }
 
 type Event interface {
@@ -49,10 +49,10 @@ type Repository struct {
 
 func NewRepository(sql *sql.DB) *Repository {
 	return &Repository{
-		Participant:   nil,
-		Event:         nil,
-		EventFeedback: nil,
-		Ticket:        nil,
-		UserEventLink: nil,
+		Participant:   NewParticipantRepo(sql),
+		Event:         NewEventRepo(sql),
+		EventFeedback: NewEventFeedbackRepo(sql),
+		Ticket:        NewTicketRepo(sql),
+		UserEventLink: NewUserEventLinkRepo(sql),
 	}
 }
