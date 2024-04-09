@@ -3,8 +3,6 @@ CREATE TABLE participant (
                              first_name VARCHAR(255),
                              last_name VARCHAR(255),
                              email VARCHAR(255) UNIQUE NOT NULL,
-                             birth_date DATE,
-                             username VARCHAR(255) UNIQUE NOT NULL,
                              password VARCHAR(255) NOT NULL,
                              role VARCHAR(50) CHECK (role IN ('user', 'organizer'))
 );
@@ -17,21 +15,25 @@ CREATE TABLE event (
                        category VARCHAR(100),
                        date_time TIMESTAMP NOT NULL,
                        address VARCHAR(255),
-                       ticket_price NUMERIC(10, 2)
+                       ticket_price NUMERIC(10, 2),
+                       ticket_count INT
 );
 
 CREATE TABLE event_feedback (
                                 id SERIAL PRIMARY KEY,
                                 event_id INT REFERENCES event(id),
                                 sender_id INT REFERENCES participant(id),
-                                text TEXT
+                                text TEXT,
+                                reply TEXT
+
 );
 
 CREATE TABLE user_event_link (
                                  user_id INT REFERENCES participant(id),
                                  event_id INT REFERENCES event(id),
-                                 link_type VARCHAR(100) CHECK (link_type IN ('like', 'going')),
-                                 PRIMARY KEY (user_id, event_id)
+                                 link_type VARCHAR(100) CHECK (link_type IN ('like', 'buy')),
+                                 PRIMARY KEY (user_id, event_id),
+                                ticket_count INT
 );
 
 CREATE TABLE ticket (

@@ -1,14 +1,10 @@
 package models
 
-import "time"
-
 type Participant struct {
-	ID        int       `json:"id"`
-	FirstName string    `json:"firstName"`
-	LastName  string    `json:"lastName"`
-	Email     string    `json:"email"`
-	BirthDate time.Time `json:"birthDate,omitempty"`
-	Username  string    `json:"username"`
-	Password  string    `json:"password"`
-	Role      string    `json:"role"`
+	ID        int    `json:"id,omitempty"`
+	FirstName string `json:"firstName,omitempty"`
+	LastName  string `json:"lastName,omitempty"`
+	Email     string `json:"email,omitempty"`
+	Password  string `json:"password,omitempty"`
+	Role      string `json:"role,omitempty"`
 }

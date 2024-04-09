@@ -1,7 +1,8 @@
 package models
 
 type UserEventLink struct {
-	UserID   int    `json:"userId"`
-	EventID  int    `json:"eventId"`
-	LinkType string `json:"linkType"`
+	Participant
+	Event       Event  `json:"event"`
+	LinkType    string `json:"linkType"`
+	TicketCount int    `json:"ticketCount,omitempty"`
 }
