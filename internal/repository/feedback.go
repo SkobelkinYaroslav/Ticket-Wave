@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"log"
 	"ticket_wave/internal/models"
 )
 
@@ -56,7 +57,9 @@ func (e FeedbackRepo) DeleteFeedbackRepo(req models.Feedback) error {
 }
 
 func (e FeedbackRepo) AnswerFeedbackRepo(req models.Feedback) error {
-	query := `UPDATE event_feedback SET reply = $1 WHERE id = $2 AND sender_id = $3`
-	_, err := e.db.Exec(query, req.Reply.String, req.ID, req.SenderID)
+	log.Println("AnswerFeedbackRepo: ", req)
+	query := `UPDATE event_feedback SET reply = $1 WHERE event_id = $2 AND sender_id = $3`
+	_, err := e.db.Exec(query, req.Reply, req.EventID, req.SenderID)
+	log.Println("AnswerFeedbackRepo: ", err)
 	return err
 }
